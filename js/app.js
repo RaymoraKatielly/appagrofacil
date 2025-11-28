@@ -875,23 +875,21 @@ function initElementSdkIfPresent() {
 /* ============================================================
    TELA: HOME
    ============================================================ */
+// ------------------------------------------------------------
+//  TELA HOME  (precisa ser sempre a primeira a existir)
+// ------------------------------------------------------------
 function renderHome() {
-  clearScreen();
-
-  const section = document.createElement("section");
-  section.className = "flex-1 flex flex-col h-full items-center justify-center px-6 text-center";
-
-  const title = document.createElement("h2");
-  title.className = "text-2xl font-extrabold text-[#3F2A14]";
-  title.textContent = "Bem-vindo ao AgroFácil";
-
-  const subtitle = document.createElement("p");
-  subtitle.className = "text-[#5C4A32] mt-2 max-w-xs";
-  subtitle.textContent = "Controle simples de custos, vendas e produtos.";
+  const container = document.getElementById("screen-container");
+  container.innerHTML = `
+    <div class="p-6 text-center">
+      <h2 class="text-xl font-bold text-[#3F2A14]">Bem-vindo ao AgroFácil</h2>
+      <p class="mt-2 text-[#5C4A32]">Escolha uma função no menu.</p>
+    </div>
+  `;
+}
 
   section.appendChild(title);
   section.appendChild(subtitle);
 
   screenContainer.appendChild(section);
-}
 
