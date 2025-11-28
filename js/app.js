@@ -875,9 +875,6 @@ function initElementSdkIfPresent() {
 /* ============================================================
    TELA: HOME
    ============================================================ */
-// ------------------------------------------------------------
-//  TELA HOME  (precisa ser sempre a primeira a existir)
-// ------------------------------------------------------------
 function renderHome() {
   const container = document.getElementById("screen-container");
   container.innerHTML = `
@@ -887,8 +884,6 @@ function renderHome() {
     </div>
   `;
 }
-
-  section.appendChild(title);
   section.appendChild(subtitle);
 
   screenContainer.appendChild(section);
