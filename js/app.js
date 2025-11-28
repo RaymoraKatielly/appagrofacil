@@ -884,7 +884,5 @@ function renderHome() {
     </div>
   `;
 }
-  section.appendChild(subtitle);
-
   screenContainer.appendChild(section);
 
