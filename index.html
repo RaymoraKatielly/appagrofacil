@@ -85,21 +85,10 @@
   <!-- =========================================================
        SISTEMA DE NAVEGAÇÃO
        ========================================================= -->
- <script>
+ <script src="js/app.js"></script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  function navigateTo(screenKey) {
-    currentScreen = screenKey;
-
-    switch (screenKey) {
-      case "home": renderHome(); break;
-      case "produtos": renderProdutos(); break;
-      case "custos": renderCustos(); break;
-      case "vendas": renderVendas(); break;
-      case "relatorios": renderRelatorios(); break;
-      case "config": renderConfig(); break;
-    }
-  }
   const btnOpenConfig = document.getElementById("btn-open-config");
 
   btnOpenConfig.addEventListener("click", (e) => {
@@ -107,12 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
     navigateTo("config");
   });
 
-  // Inicialização do app
-  renderHome();
+  navigateTo("home");
 
 });
 </script>
-
 
   <!-- =========================================================
        SERVICE WORKER (PWA)
