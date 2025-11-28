@@ -85,30 +85,34 @@
   <!-- =========================================================
        SISTEMA DE NAVEGAÇÃO
        ========================================================= -->
-  <script>
-    function navigateTo(screenKey) {
-      currentScreen = screenKey;
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
 
-      switch (screenKey) {
-        case "home": renderHome(); break;
-        case "produtos": renderProdutos(); break;
-        case "custos": renderCustos(); break;
-        case "vendas": renderVendas(); break;
-        case "relatorios": renderRelatorios(); break;
-        case "config": renderConfig(); break;
-      }
+  function navigateTo(screenKey) {
+    currentScreen = screenKey;
+
+    switch (screenKey) {
+      case "home": renderHome(); break;
+      case "produtos": renderProdutos(); break;
+      case "custos": renderCustos(); break;
+      case "vendas": renderVendas(); break;
+      case "relatorios": renderRelatorios(); break;
+      case "config": renderConfig(); break;
     }
-    const btnOpenConfig = document.getElementById("btn-open-config");
-    btnOpenConfig.addEventListener("click", (e) => {
-      e.preventDefault();
-      navigateTo("config");
-    });
+  }
+  const btnOpenConfig = document.getElementById("btn-open-config");
 
-    // Inicialização do app
-    (function init() {
-      renderHome();
-    })();
-  </script>
+  btnOpenConfig.addEventListener("click", (e) => {
+    e.preventDefault();
+    navigateTo("config");
+  });
+
+  // Inicialização do app
+  renderHome();
+
+});
+</script>
+
 
   <!-- =========================================================
        SERVICE WORKER (PWA)
