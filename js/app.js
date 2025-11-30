@@ -1,4 +1,3 @@
-{"variant";"standard","id";"87542","title";"app.js final completo AgroFácil"}
 import { supabase } from './supabaseClient.js';
 
 /* ==========================================================
