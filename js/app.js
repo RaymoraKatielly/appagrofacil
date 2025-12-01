@@ -210,9 +210,11 @@ function renderHome() {
   sec.className = "flex-1 flex flex-col h-full overflow-auto p-6";
   const title = document.createElement("h2");
   title.className = "text-2xl font-extrabold text-[#3F2A14]";
+  // 👉 AQUI adicionamos o texto bem vindo ao AgroFácil
   title.textContent = "Bem-vindo ao AgroFácil";
   const subtitle = document.createElement("p");
   subtitle.className = "mt-2 text-[#5C4A32]";
+  // 👉 AQUI adicionamos o texto escolha uma função no menu
   subtitle.textContent = "Escolha uma função no menu.";
   const actions = document.createElement("div");
   actions.className = "mt-6 grid grid-cols-2 gap-3";
@@ -226,7 +228,14 @@ function renderHome() {
   };
   actions.append(btn("Produtos","produtos"), btn("Vendas","vendas"));
   actions.append(btn("Custos","custos"), btn("Relatórios","relatorios"));
-  sec.append(title,subtitle,actions);
+
+  // 👉 AQUI adicionamos o texto que fala sobre o botão amarelo
+  const configHint = document.createElement("p");
+  configHint.className = "mt-4 text-sm text-[#5C4A32] text-center italic";
+  configHint.textContent =
+    "⚙️ As Configurações ficam no botão amarelo no topo da tela.";
+
+   sec.append(title, subtitle, actions, configHint);
   screenContainer.appendChild(sec);
 }
 
