@@ -317,10 +317,6 @@ const cont = document.createElement("div");
 cont.id = "product-list";
 cont.className = "mt-6 flex flex-col gap-2";
 
-// Função para gerar UUID
-function generateUUID() {
-return crypto.randomUUID();
-}
 
 // Botão para cadastrar novo produto
 const addBtn = document.createElement("button");
