@@ -540,17 +540,33 @@ function renderConfig() {
   label.appendChild(checkbox);
   section.appendChild(label);
 
-  // Botão SUPORTE
-  const supportBtn = document.createElement("button");
-  supportBtn.textContent = "Suporte";
-  supportBtn.className = "mt-6 bg-[#16A34A] text-white px-4 py-2 rounded-full hover:opacity-90";
-  supportBtn.addEventListener("click", () => navigateTo("suporte"));
-  section.appendChild(supportBtn);
+  // Botões Extras
+  const suporteBtn = document.createElement("button");
+  suporteBtn.textContent = "Suporte";
+  suporteBtn.className = "mt-6 bg-[#16A34A] text-white px-4 py-2 rounded-full";
+  suporteBtn.addEventListener("click", () => navigateTo("suporte"));
 
+  const ajudaBtn = document.createElement("button");
+  ajudaBtn.textContent = "Ajuda";
+  ajudaBtn.className = "mt-2 bg-[#D1B38A] text-[#3F2A14] px-4 py-2 rounded-full";
+  ajudaBtn.addEventListener("click", () => alert("Em construção"));
+
+  const sobreBtn = document.createElement("button");
+  sobreBtn.textContent = "Sobre";
+  sobreBtn.className = "mt-2 bg-[#D1B38A] text-[#3F2A14] px-4 py-2 rounded-full";
+  sobreBtn.addEventListener("click", () => alert("AgroFácil v1.0"));
+
+  section.appendChild(suporteBtn);
+  section.appendChild(ajudaBtn);
+  section.appendChild(sobreBtn);
+
+  // Botão voltar
   section.appendChild(createBackButton());
+
   screenContainer.appendChild(section);
 }
 
+// Botão Suporte
 function renderSuporte() {
   clearScreen();
 
