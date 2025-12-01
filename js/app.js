@@ -319,68 +319,54 @@ function renderProdutos() {
 
   sec.append(title, subtitle, cont);
   screenContainer.appendChild(sec);
+}
+  function updateProductListUI() {
+  cont.innerHTML = "";
 
-  // Garante que cada produto tem um ID confiável
-  products.forEach((prod, index) => {
-    if (prod.id == null) {
-      prod.id = Date.now() + index; // gera ID único local
-    }
+  products.forEach(prod => {
+    const div = document.createElement("div");
+    div.className = "product-item flex justify-between items-center p-2 border-b rounded";
+    div.innerHTML = `
+      <span>${prod.name}</span>
+      <div class="flex gap-2">
+        <button class="edit-product bg-blue-500 text-white px-3 py-1 rounded" data-id="${prod.id}">Editar</button>
+        <button class="delete-product bg-red-500 text-white px-3 py-1 rounded" data-id="${prod.id}">Excluir</button>
+      </div>
+    `;
+    cont.appendChild(div);
   });
 
-  function updateProductListUI() {
-    cont.innerHTML = "";
+  // Delete seguro
+  cont.querySelectorAll(".delete-product").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = Number(btn.dataset.id);
+      if (isNaN(id)) return console.error("ID inválido:", btn.dataset.id);
 
-    products.forEach(prod => {
-      if (prod.id == null) return;
+      products = products.filter(p => p.id !== id);
+      save(storageKeys.PRODUTOS, products);
+      updateProductListUI();
 
-      const div = document.createElement("div");
-      div.className = "product-item flex justify-between items-center p-2 border-b rounded";
-
-      div.innerHTML = `
-        <span>${prod.name}</span>
-        <div class="flex gap-2">
-          <button class="edit-product bg-blue-500 text-white px-3 py-1 rounded" data-id="${prod.id}">Editar</button>
-          <button class="delete-product bg-red-500 text-white px-3 py-1 rounded" data-id="${prod.id}">Excluir</button>
-        </div>
-      `;
-
-      cont.appendChild(div);
-    });
-
-    // Delete seguro
-    cont.querySelectorAll(".delete-product").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const id = Number(btn.dataset.id);
-        if (isNaN(id)) return console.error("ID inválido:", btn.dataset.id);
-
-        products = products.filter(p => p.id !== id);
-        save(storageKeys.PRODUTOS, products);
-        updateProductListUI();
-
-        if (navigator.onLine) {
-          try {
-            const { error } = await supabase.from("produtos").delete().eq("id", id);
-            if (error) throw error;
-            console.log("Produto deletado no Supabase:", id);
-          } catch (e) {
-            console.warn("Erro delete Supabase:", e);
-          }
+      if (navigator.onLine) {
+        try {
+          const { error } = await supabase.from("produtos").delete().eq("id", id);
+          if (error) throw error;
+          console.log("Produto deletado no Supabase:", id);
+        } catch (e) {
+          console.warn("Erro delete Supabase:", e);
         }
-      });
+      }
     });
+  });
 
-    // Editar produto
-    cont.querySelectorAll(".edit-product").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = Number(btn.dataset.id);
-        const produto = products.find(p => p.id === id);
-        if (!produto) return;
-        console.log("Editar produto:", produto);
-      });
+  // Editar produto
+  cont.querySelectorAll(".edit-product").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = Number(btn.dataset.id);
+      const produto = products.find(p => p.id === id);
+      if (!produto) return;
+      console.log("Editar produto:", produto);
     });
-  }
-
-  updateProductListUI();
+  });
 }
 
 /* ---------------------------
