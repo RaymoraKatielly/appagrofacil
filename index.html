@@ -89,26 +89,48 @@
     }
   </script>
 
-<!-- Painel lateral de configurações -->
+<!-- Painel lateral de configurações (DEVE FICAR DENTRO DO APP-SHELL) -->
 <div id="config-panel"
-     class="fixed top-0 right-0 w-64 h-full bg-white shadow-xl p-4 transform translate-x-full transition-transform duration-300 z-50">
-  
-  <h2 class="text-xl font-bold mb-4">Configurações</h2>
+     class="fixed top-0 right-0 w-72 h-full bg-white shadow-2xl p-5 transform translate-x-full transition-transform duration-300 z-50">
 
-  <button id="btn-close-config"
-          class="bg-red-500 text-white px-3 py-1 rounded">
-    Fechar
-  </button>
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Configurações</h2>
 
-  <p class="mt-4 text-sm">Aqui você vai colocar suas opções...</p>
+    <button id="btn-close-config" class="text-red-600 font-bold text-xl">
+      ✕
+    </button>
+  </div>
+
+  <div class="mt-4 space-y-6">
+
+    <!-- SUPORTE -->
+    <div class="border-b pb-3">
+      <h3 class="font-semibold text-lg">Suporte</h3>
+      <p class="text-sm mt-1">Precisa de ajuda? Fale com o suporte do AgroFácil.</p>
+
+      <button class="mt-2 bg-blue-500 text-white px-3 py-1 rounded w-full">
+        Contatar Suporte
+      </button>
+    </div>
+
+    <!-- AJUDA -->
+    <div class="border-b pb-3">
+      <h3 class="font-semibold text-lg">Ajuda</h3>
+      <p class="text-sm mt-1">Veja tutoriais, dicas e documentação.</p>
+
+      <button class="mt-2 bg-green-500 text-white px-3 py-1 rounded w-full">
+        Abrir Ajuda
+      </button>
+    </div>
+
+    <!-- SOBRE -->
+    <div>
+      <h3 class="font-semibold text-lg">Sobre o App</h3>
+      <p class="text-sm mt-1">Versão 1.0. AgroFácil - Gestão agrícola simplificada.</p>
+    </div>
+
+  </div>
 
 </div>
-</body>
-</html>
-
-
-
-
-
 
 

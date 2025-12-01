@@ -669,3 +669,20 @@ function initConfigButtons() {
 // chama a função assim que o app carregar
 window.addEventListener("DOMContentLoaded", initConfigButtons);
 
+// --- CONTROLES DO PAINEL DE CONFIGURAÇÕES ---
+
+const openConfigBtn = document.getElementById("btn-open-config");
+const closeConfigBtn = document.getElementById("btn-close-config");
+const configPanel = document.getElementById("config-panel");
+
+if (openConfigBtn && closeConfigBtn && configPanel) {
+  openConfigBtn.addEventListener("click", () => {
+    configPanel.classList.remove("translate-x-full");
+  });
+
+  closeConfigBtn.addEventListener("click", () => {
+    configPanel.classList.add("translate-x-full");
+  });
+} else {
+  console.warn("⚠️ Elementos do painel não encontrados no DOM.");
+}
