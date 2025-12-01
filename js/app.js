@@ -228,7 +228,12 @@ subtitle.textContent = "Escolha uma função no menu.";
 // =====================
 const actions = document.createElement("div");
 actions.className =
-"mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center";
+"mt-6 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 justify-items-center";
+// grid → transforma o container em grid CSS. grid-cols-2 → 1 coluna no mobile (padrão). 
+// sm:grid-cols-2 → 2 colunas a partir de telas “small” (tablet).
+//lg:grid-cols-4 → 4 colunas em telas grandes (desktop).
+//gap-4 → espaçamento entre os botões.
+//justify-items-center → centraliza os botões horizontalmente dentro de cada célula.
 
 // =====================
 // Ícones SVG
