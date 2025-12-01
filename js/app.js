@@ -63,7 +63,7 @@ let screenContainer = null;
 --------------------------- */
 async function saveProductToSupabase(produto) {
   try {
-    const { data, error } = await supabase.from('produtos').insert([produto]);
+    const { data, error } = await supabase.from('produto').insert([produto]);
     if (error) console.error("Supabase erro (produto):", error);
     else console.log("Produto salvo no Supabase:", data);
   } catch (err) {
@@ -73,7 +73,7 @@ async function saveProductToSupabase(produto) {
 
 async function saveVendaToSupabase(venda) {
   try {
-    const { data, error } = await supabase.from('vendas').insert([venda]);
+    const { data, error } = await supabase.from('venda').insert([venda]);
     if (error) console.error("Supabase erro (venda):", error);
     else console.log("Venda salva no Supabase:", data);
   } catch (err) {
@@ -83,7 +83,7 @@ async function saveVendaToSupabase(venda) {
 
 async function saveCustoToSupabase(custo) {
   try {
-    const { data, error } = await supabase.from('custos').insert([custo]);
+    const { data, error } = await supabase.from('custo').insert([custo]);
     if (error) console.error("Supabase erro (custo):", error);
     else console.log("Custo salvo no Supabase:", data);
   } catch (err) {
