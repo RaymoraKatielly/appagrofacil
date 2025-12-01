@@ -210,71 +210,78 @@ function navigateTo(screenKey) {
    HOME
 --------------------------- */
 function renderHome() {
-  clearScreen();
+clearScreen();
 
-  const sec = document.createElement("section");
-  sec.className = "flex-1 flex flex-col h-full overflow-auto p-6";
+const sec = document.createElement("section");
+sec.className = "flex-1 flex flex-col h-full overflow-auto p-6";
 
-  const title = document.createElement("h2");
-  title.className = "text-2xl font-extrabold text-[#3F2A14]";
-  title.textContent = "Bem-vindo ao AgroFácil";
+const title = document.createElement("h2");
+title.className = "text-2xl font-extrabold text-[#3F2A14]";
+title.textContent = "Bem-vindo ao AgroFácil";
 
-  const subtitle = document.createElement("p");
-  subtitle.className = "mt-2 text-[#5C4A32]";
-  subtitle.textContent = "Escolha uma função no menu.";
+const subtitle = document.createElement("p");
+subtitle.className = "mt-2 text-[#5C4A32]";
+subtitle.textContent = "Escolha uma função no menu.";
 
-  const actions = document.createElement("div");
-  actions.className = "mt-6 grid grid-cols-2 gap-3";
+// =====================
+// Container responsivo dos botões
+// =====================
+const actions = document.createElement("div");
+actions.className =
+"mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center";
 
-  // =====================
-  // Ícones SVG
-  // =====================
-  const iconProdutos = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-13z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>`;
-  const iconVendas = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-3.866 0-7 1.79-7 4s3.134 4 7 4 7-1.79 7-4"/><path d="M12 4v4m0 8v4"/></svg>`;
-  const iconCustos = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-5"/></svg>`;
-  const iconRelatorios = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M7 17v-5m5 5v-8m5 8v-3"/></svg>`;
+// =====================
+// Ícones SVG
+// =====================
+const iconProdutos = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-13z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>`;
+const iconVendas = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-3.866 0-7 1.79-7 4s3.134 4 7 4 7-1.79 7-4"/><path d="M12 4v4m0 8v4"/></svg>`;
+const iconCustos = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-5"/></svg>`;
+const iconRelatorios = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M7 17v-5m5 5v-8m5 8v-3"/></svg>`;
 
-  // =====================
-  // Função btn()
-  // =====================
-  const btn = (label, key, iconSVG) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className =
-      "focus-ring flex flex-col items-center justify-center gap-2 rounded-2xl px-4 py-4 font-bold text-sm bg-[#16A34A] text-[#FDF6E3] hover:opacity-90 transition";
+// =====================
+// Função btn() com hover animado
+// =====================
+const btn = (label, key, iconSVG) => {
+const b = document.createElement("button");
+b.type = "button";
+b.className =
+"focus-ring flex flex-col items-center justify-center gap-2 rounded-2xl px-6 py-4 font-bold text-sm bg-[#16A34A] text-[#FDF6E3] hover:opacity-90 transition-transform transform hover:scale-105";
 
-    const icon = document.createElement("div");
-    icon.innerHTML = iconSVG;
-    icon.className = "w-8 h-8";
+```
+const icon = document.createElement("div");
+icon.innerHTML = iconSVG;
+icon.className = "w-10 h-10 sm:w-12 sm:h-12 transition-transform transform hover:scale-110";
 
-    const t = document.createElement("span");
-    t.textContent = label;
+const t = document.createElement("span");
+t.textContent = label;
 
-    b.append(icon, t);
-    b.addEventListener("click", () => navigateTo(key));
-    return b;
-  };
+b.append(icon, t);
+b.addEventListener("click", () => navigateTo(key));
+return b;
+```
 
-  // =====================
-  // Adiciona os botões
-  // =====================
-  actions.append(
-    btn("Produtos", "produtos", iconProdutos),
-    btn("Vendas", "vendas", iconVendas)
-  );
+};
 
-  actions.append(
-    btn("Custos", "custos", iconCustos),
-    btn("Relatórios", "relatorios", iconRelatorios)
-  );
+// =====================
+// Adiciona os botões
+// =====================
+actions.append(
+btn("Produtos", "produtos", iconProdutos),
+btn("Vendas", "vendas", iconVendas),
+btn("Custos", "custos", iconCustos),
+btn("Relatórios", "relatorios", iconRelatorios)
+);
 
-  const configHint = document.createElement("p");
-  configHint.className = "mt-4 text-sm text-[#5C4A32] text-center italic";
-  configHint.textContent =
-    "⚙️ As Configurações ficam no botão amarelo no topo da tela.";
+// =====================
+// Texto de dica
+// =====================
+const configHint = document.createElement("p");
+configHint.className = "mt-4 text-sm text-[#5C4A32] text-center italic";
+configHint.textContent =
+"⚙️ As Configurações ficam no botão amarelo no topo da tela.";
 
-  sec.append(title, subtitle, actions, configHint);
-  screenContainer.appendChild(sec);
+sec.append(title, subtitle, actions, configHint);
+screenContainer.appendChild(sec);
 }
 
 /* ---------------------------
