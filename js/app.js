@@ -299,9 +299,6 @@ screenContainer.appendChild(sec);
 /* ---------------------------
    PRODUTOS
 --------------------------- */
-/* ---------------------------
-PRODUTOS (corrigido)
---------------------------- */
 function renderProdutos() {
 clearScreen();
 
@@ -339,13 +336,11 @@ addBtn.addEventListener("click", () => {
 const name = prompt("Nome do produto:");
 if (!name) return;
 
-```
 const newProduct = { id: crypto.randomUUID(), nome: name };
 products.push(newProduct);
 
 save(storageKeys.PRODUTOS, products);
 updateProductListUI();
-```
 
 });
 section.appendChild(addBtn);
