@@ -719,23 +719,20 @@ function renderSuporte() {
 /* ---------------------------
    Inicialização
 --------------------------- */
-document.addEventListener("DOMContentLoaded", async ()=>{
+document.addEventListener("DOMContentLoaded", async () => {
   screenContainer = document.getElementById("screen-container");
 
-  //Carrega produtos do Supabase ao iniciar
-  //await loadProductsFromSupabase();
-
-  navigateTo("home");
-});
-
-
-  // carregar dados do Supabase
+  // Carrega dados do Supabase ao iniciar
   await loadProductsFromSupabase();
   await loadVendasFromSupabase();
   await loadCustosFromSupabase();
 
+  // Disponibiliza navegação no escopo global
   window.navigateTo = navigateTo;
+
+  // Abre a tela inicial
   navigateTo("home");
+});
 
 
 function initConfigButtons() {
