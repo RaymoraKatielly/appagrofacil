@@ -109,6 +109,37 @@ async function loadProductsFromSupabase() {
   }
 }
 
+/* ---------------------------
+   APAGAR TODOS OS PRODUTOS
+--------------------------- */
+async function limparTudo() {
+  const confirmar = confirm("Tem certeza que deseja APAGAR TODOS os produtos?");
+
+  if (!confirmar) return;
+
+  // Apagar do Supabase
+  const { error } = await supabase
+    .from("produto")
+    .delete()
+    .gt("id", 0); // apaga todos
+
+  if (error) {
+    alert("Erro ao limpar produtos: " + error.message);
+    return;
+  }
+
+  // Apagar local
+  products = [];
+  save(storageKeys.PRODUTOS, []);
+
+  alert("Todos os produtos foram apagados!");
+
+  // Recarregar tela
+  if (typeof renderProdutos === "function") {
+    renderProdutos();
+  }
+}
+
 async function loadVendasFromSupabase() {
   try {
     const { data, error } = await supabase.from('venda').select('*');
@@ -637,33 +668,30 @@ function renderConfig() {
   autoSyncLabel.append(autoSyncCheck, document.createTextNode("Sincronização automática"));
   section.appendChild(autoSyncLabel);
 
-  /* BOTÃO LIMPAR TODOS OS PRODUTOS */
-  const limparBtn = document.createElement("button");
-  limparBtn.textContent = "Limpar todos os produtos";
-  limparBtn.className = "bg-red-600 text-white px-4 py-2 rounded-lg mt-4 shadow font-semibold";
+  // Botão para limpar tudo
+document.getElementById("limpaTudo").addEventListener("click", async () => {
+  const confirmar = confirm("Tem certeza que deseja apagar TODOS os produtos?");
+  if (!confirmar) return;
 
-  limparBtn.addEventListener("click", async () => {
-    if (!confirm("Tem certeza que deseja APAGAR TODOS os produtos?")) return;
+  // Apaga todos os produtos da tabela "produto"
+  const { error } = await supabase
+    .from("produto")
+    .delete()
+    .neq("id", ""); // deleta tudo
 
-    try {
-      await supabase.from("produto").delete().neq("id", "");
-      products = [];
-      save(storageKeys.PRODUTOS, products);
+  if (error) {
+    alert("Erro ao limpar produtos: " + error.message);
+    return;
+  }
 
-      alert("Todos os produtos foram excluídos!");
-      navigateTo("produtos");
+  alert("Todos os produtos foram apagados!");
 
-    } catch (err) {
-      alert("Erro ao apagar dados do Supabase.");
-      console.error(err);
-    }
-  });
-
-  section.appendChild(limparBtn);
-
-  screenContainer.appendChild(section);
+  // Atualiza a interface
+  if (typeof loadProductsFromSupabase === "function") {
+    await loadProductsFromSupabase();
+  }
+});
 }
-
 // Botão Suporte
 function renderSuporte() {
   clearScreen();
