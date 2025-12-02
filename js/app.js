@@ -55,43 +55,6 @@ let config = load(storageKeys.CONFIG, { autoSync: true });
 let currentScreen = "home";
 let screenContainer = null;
 
-/* ---------------------------
-   Supabase helpers - colunas das tabelas
---------------------------- */
-async function loadProductsFromSupabase() {
-  if (!navigator.onLine) return; // offline, não sincroniza
-
-  try {
-    const { data, error } = await supabase
-      .from("produto") // tabela correta
-      .select("*");
-
-    if (error) {
-      console.warn("Erro carregando produtos:", error);
-      return;
-    }
-
-    // Se vier vazio, NÃO sobrescreve o localStorage
-    if (!data || data.length === 0) {
-      console.log("Supabase vazio — mantendo produtos locais.");
-      return;
-    }
-
-    // Apenas atualiza se houver dados válidos
-    products = data.map(p => ({
-      id: p.id,
-      nome: p.nome || "Sem nome",
-      preco: p.preco || 0,
-      synced: true
-    }));
-
-    save(storageKeys.PRODUTOS, products);
-
-  } catch (e) {
-    console.error("Erro no loadProductsFromSupabase:", e);
-  }
-}
-
 async function saveVendaToSupabase(venda) {
   try {
     const { data, error } = await supabase.from('venda').insert([venda]);
@@ -113,7 +76,7 @@ async function saveCustoToSupabase(custo) {
 }
 
 /* ---------------------------
-   Carregamento do Supabase (corrigido)
+   Carregamento do Supabase
 --------------------------- */
 async function loadProductsFromSupabase() {
   try {
