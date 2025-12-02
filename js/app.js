@@ -58,13 +58,37 @@ let screenContainer = null;
 /* ---------------------------
    Supabase helpers - colunas das tabelas
 --------------------------- */
-async function saveProductToSupabase(produto) {
+async function loadProductsFromSupabase() {
+  if (!navigator.onLine) return; // offline, não sincroniza
+
   try {
-    const { data, error } = await supabase.from('produto').insert([produto]);
-    if (error) console.error("Supabase erro (produto):", error);
-    else console.log("Produto salvo no Supabase:", data);
-  } catch (err) {
-    console.warn("Erro ao salvar produto no Supabase:", err);
+    const { data, error } = await supabase
+      .from("produto") // tabela correta
+      .select("*");
+
+    if (error) {
+      console.warn("Erro carregando produtos:", error);
+      return;
+    }
+
+    // Se vier vazio, NÃO sobrescreve o localStorage
+    if (!data || data.length === 0) {
+      console.log("Supabase vazio — mantendo produtos locais.");
+      return;
+    }
+
+    // Apenas atualiza se houver dados válidos
+    products = data.map(p => ({
+      id: p.id,
+      nome: p.nome || "Sem nome",
+      preco: p.preco || 0,
+      synced: true
+    }));
+
+    save(storageKeys.PRODUTOS, products);
+
+  } catch (e) {
+    console.error("Erro no loadProductsFromSupabase:", e);
   }
 }
 
