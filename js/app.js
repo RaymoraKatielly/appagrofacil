@@ -378,7 +378,7 @@ cont.querySelectorAll(".delete-product").forEach(btn => {
 
     if (navigator.onLine) {
       try {
-        await supabase.from("produtos").delete().eq("id", id);
+        await supabase.from("produto").delete().eq("id", id);
       } catch (e) {
         console.warn("Erro ao excluir no Supabase:", e);
       }
